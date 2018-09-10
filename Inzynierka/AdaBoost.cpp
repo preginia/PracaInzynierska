@@ -78,6 +78,12 @@ void AdaBoost::DSBoost()
 		classifiers.push_back(cls);
 		alphas.push_back(alpha);
 	}
+
+	double alpha_sum = 0.0;
+	for (int i = 0; i < alphas.size(); i++)
+		alpha_sum += abs(alphas.at(i));
+	for (int i = 0; i < alphas.size(); i++)
+		alphas.at(i) /= alpha_sum;
 }
 
 void AdaBoost::PerceptronBoost()
@@ -148,6 +154,12 @@ void AdaBoost::PerceptronBoost()
 		classifiers.push_back(cls);
 		alphas.push_back(alpha);
 	}
+
+	double alpha_sum = 0.0;
+	for (int i = 0; i < alphas.size(); i++)
+		alpha_sum += abs(alphas.at(i));
+	for (int i = 0; i < alphas.size(); i++)
+		alphas.at(i) /= alpha_sum;
 }
 
 
@@ -159,7 +171,7 @@ double AdaBoost::Classification(Sample sample)
 
 	for (int i = 0; i < iterations; i++)
 	{
-		int y = classifiers.at(i)->Classification(sample);
+		double y = classifiers.at(i)->Classification(sample);
 
 		out += alphas.at(i) * y;
 

@@ -33,6 +33,16 @@ void Perceptron::WriteLearningStatusInLastIteration(int iterationsAmount, int ba
 	//cout << "Last iteration " << iterationsAmount << " || " << "Bad classificcated samples: " << badClassificatedSamplesAmount << endl;
 }
 
+vector<double> Perceptron::GetProperitesAt(int i)
+{
+	vector<double> samples;
+	for (auto sample : samplesList)
+	{
+		samples.push_back(sample.getProperty(i));
+	}
+	return samples;
+}
+/*
 void Perceptron::Learning()
 {
 	srand(time(NULL));
@@ -124,10 +134,72 @@ void Perceptron::Learning()
 
 	}
 }
+*/
+void Perceptron::Learning()
+{
+	int matIT = 1500;
+	double curr_err = 1000000;
 
+	for (int i = 0; i < samplesList.at(0).getNumberOfProperites(); i++)
+	{
+		double bias = 0.0;
+		double weight = 0.0;
+		vector<double> samples = GetProperitesAt(i);
+
+		for (int j = 0; j < matIT; j++)
+		{
+			int incorrect = 0;
+
+			for (int k = 0 ; k < samplesList.size() ; k++)	// dla kazdej probki
+			{
+				double s = weight * samples[k] + bias;
+				int f = compare(s, 0);
+
+				
+				int err = classes[k] - f / 2.0;
+
+				incorrect += (err != 0 ? 1 : 0);
+
+				double tmp = learningFactor * err * (ada_weights != nullptr ? ada_weights->at(k) : 1) * samplesList.size();
+
+				bias += 1 * tmp;
+				weight += samples[k] * tmp;
+			}
+
+			if (incorrect == 0 || j == matIT-1)
+			{
+				double e = 0.0;
+
+				for(int k = 0 ; k < samplesList.size() ; k++)
+				{
+					int out = out = ((weight * samples[k] + bias) <= 0) ? -1 : 1;
+					e += (classes[k] != out) * (ada_weights != nullptr ? ada_weights->at(k) : 1);
+				}
+
+				if (e < curr_err)
+				{
+					this->_fet = i;
+					this->_weight = weight;
+					this->_bias = bias;
+					curr_err = e;
+				}
+
+				if (incorrect == 0)
+					break;
+			}
+		}
+	}
+
+}
+/*
 double Perceptron::Classification(Sample sample)
 {
 	return countWithBestWeights(sample);
+}
+*/
+double Perceptron::Classification(Sample sample)
+{
+	return (_weight * sample.getProperty(_fet) + _bias) <= 0 ? -1 : 1;
 }
 
 double Perceptron::countWithWeights(Sample patient)
@@ -178,7 +250,7 @@ Perceptron::Perceptron(vector<Sample> sampleList, string localization) : Classif
 	}
 
 	this->threshold = 0;
-	this->learningFactor =0.2;
+	this->learningFactor =0.02;
 	this->localization = localization;
 
 	ada_weights = nullptr;
@@ -226,7 +298,7 @@ void Perceptron::writeWeights()
 
 int Perceptron::compare(double n1, double threshold)
 {
-	if (n1 < threshold)
+	if (n1 <= threshold)
 		return -1;
 	else
 		return 1;

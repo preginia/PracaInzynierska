@@ -9,6 +9,10 @@ private:
 	vector<double> weight;
 	vector<double> bestWeight;
 
+	int _fet;
+	double _weight;
+	double _bias;
+
 	vector<Sample> getListOfBadlyClassificatedSamples();
 	vector<double> *ada_weights = nullptr;
 
@@ -27,10 +31,13 @@ private:
 	double countWithBestWeights(Sample patient);
 
 
+	vector<double> GetProperitesAt(int i);
 public:
 	void Learning() override;
+	void Learning2();
 	double Classification(Sample sample) override;
 
+	double Classification2(Sample sample) ;
 	Perceptron(vector<Sample> samplesList, vector<double> &ada_weights, string localization);
 	Perceptron(vector<Sample> samplesList, string localization);
 
