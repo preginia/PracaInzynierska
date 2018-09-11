@@ -150,6 +150,7 @@
     <ClInclude Include="DatasFromFile.h" />
     <ClInclude Include="DecisionStump.h" />
     <ClInclude Include="Localization.h" />
+    <ClInclude Include="MultiVariantePerceptron.h" />
     <ClInclude Include="OneVsAll.h" />
     <ClInclude Include="Patient.h" />
     <ClInclude Include="Perceptron.h" />
@@ -175,6 +176,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Localization.cpp" />
+    <ClCompile Include="MultiVariantePerceptron.cpp" />
     <ClCompile Include="OneVsAll.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>

@@ -6,12 +6,22 @@
 class Perceptron : public Classifier
 {
 private:
-	vector<double> weight;
-	vector<double> bestWeight;
 
 	int _fet;
 	double _weight;
 	double _bias;
+
+
+
+
+	vector<double> GetProperitesAt(int i);
+
+protected:
+
+	double countWithBestWeights(Sample patient);
+	vector<double> weight;
+	vector<double> bestWeight;
+
 
 	vector<Sample> getListOfBadlyClassificatedSamples();
 	vector<double> *ada_weights = nullptr;
@@ -28,10 +38,7 @@ private:
 	void WriteLearningStatusInLastIteration(int iterationsAmount, int badClassificatedSamplesAmount);
 
 	double countWithWeights(Sample patient);
-	double countWithBestWeights(Sample patient);
 
-
-	vector<double> GetProperitesAt(int i);
 public:
 	void Learning() override;
 	void Learning2();

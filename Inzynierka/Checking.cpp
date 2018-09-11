@@ -81,8 +81,7 @@ double Checking::PercentOfCorrectlyClassificatedSamples(AdaBoostOneVsAll adaboos
 {
 	int counter = 0;
 	for (auto sample : samplesList)
-	{
-		if (adaboosts.Classification(sample) == sample.getLozalization())
+	{		if (adaboosts.Classification(sample) == sample.getLozalization())
 		{
 			counter++;
 		}

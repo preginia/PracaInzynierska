@@ -137,14 +137,18 @@ void Perceptron::Learning()
 */
 void Perceptron::Learning()
 {
-	int matIT = 500;
+	//srand(time(NULL));
+
+	int matIT = 1500;
 	double curr_err = 1000000;
 
 	for (int i = 0; i < samplesList.at(0).getNumberOfProperites(); i++)
 	{
-		double bias = 0.0;
-		double weight = 0.0;
+
+		double bias = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+		double weight = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
 		vector<double> samples = GetProperitesAt(i);
+
 
 		for (int j = 0; j < matIT; j++)
 		{
@@ -163,7 +167,7 @@ void Perceptron::Learning()
 					incorrect++;
 				}
 
-				double tmp = learningFactor * err * (double)samplesList.size();
+				double tmp = learningFactor * err /** (double)samplesList.size*/;
 
 				if (ada_weights != nullptr)
 				{
@@ -182,11 +186,20 @@ void Perceptron::Learning()
 			if (incorrect == 0 || j == matIT-1)
 			{
 				double e = 0.0;
+				double maxerr = 0.0;
 
 				for(int k = 0 ; k < samplesList.size() ; k++)
 				{
 					int out = ((weight * samples[k] + bias) <= 0) ? -1 : 1;
 					e += (classes[k] != out) *  (ada_weights != nullptr ? ada_weights->at(k) : 1.0);
+					maxerr += (ada_weights != nullptr ? ada_weights->at(k) : 1.0);
+				}
+
+				if (e > maxerr / 2.0)
+				{
+					weight *= -1.0;
+					bias *= -1.0;
+					e = maxerr - e;
 				}
 
 				if (e < curr_err)
@@ -215,7 +228,6 @@ double Perceptron::Classification(Sample sample)
 double Perceptron::Classification(Sample sample)
 {
 	return  (_weight * sample.getProperty(_fet) + _bias) <= 0 ? -1 : 1;
-
 }
 
 double Perceptron::countWithWeights(Sample patient)
@@ -261,12 +273,12 @@ Perceptron::Perceptron(vector<Sample> sampleList, string localization) : Classif
 	//ustawienie domyœlej wagi dla ka¿dej próbki
 	for (int i = 0; i < sampleList.at(0).getNumberOfProperites(); i++)
 	{
-		this->weight.push_back(1);
+		this->weight.push_back(1/*static_cast <float> (rand()) / static_cast <float> (RAND_MAX)*/);
 		this->bestWeight.push_back(1);
 	}
 
 	this->threshold = 0;
-	this->learningFactor =0.001;
+	this->learningFactor = 0.001;
 	this->localization = localization;
 
 	ada_weights = nullptr;

@@ -23,6 +23,7 @@ private:
 public:
 	void DSBoost();
 	void PerceptronBoost();
+	void PerceptronMVBoost();
 	double Classification(Sample sample);
 	AdaBoost(vector<Sample> listOfSamples,int iterations,std::string localization);
 	~AdaBoost();
