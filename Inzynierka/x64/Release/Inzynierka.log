@@ -1,10 +1,7 @@
-﻿  MultiVariantePerceptron.cpp
-c:\users\preginia\documents\inzynierka\inzynierka\multivarianteperceptron.cpp(11): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-c:\users\preginia\documents\inzynierka\inzynierka\multivarianteperceptron.cpp(14): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-c:\users\preginia\documents\inzynierka\inzynierka\multivarianteperceptron.cpp(44): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+﻿  Inzynierka.cpp
   Generating code
-  1 of 623 functions ( 0.2%) were compiled, the rest were copied from previous compilation.
+  16 of 641 functions ( 2.5%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
+    7 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
-  Inzynierka.vcxproj -> C:\Users\preginia\Documents\Inzynierka\x64\Release\Inzynierka.exe
+  Inzynierka.vcxproj -> C:\Users\Przemek\Main()\Studia\Inzynierka\Inzynierka\x64\Release\Inzynierka.exe

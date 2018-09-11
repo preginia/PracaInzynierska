@@ -135,11 +135,12 @@ void Perceptron::Learning()
 	}
 }
 */
+
+
 void Perceptron::Learning()
 {
 	//srand(time(NULL));
 
-	int matIT = 1500;
 	double curr_err = 1000000;
 
 	for (int i = 0; i < samplesList.at(0).getNumberOfProperites(); i++)
@@ -150,7 +151,7 @@ void Perceptron::Learning()
 		vector<double> samples = GetProperitesAt(i);
 
 
-		for (int j = 0; j < matIT; j++)
+		for (int j = 0; j < it; j++)
 		{
 			int incorrect = 0;
 
@@ -183,7 +184,7 @@ void Perceptron::Learning()
 
 			}
 
-			if (incorrect == 0 || j == matIT-1)
+			if (incorrect == 0 || j == it-1)
 			{
 				double e = 0.0;
 				double maxerr = 0.0;
@@ -266,19 +267,20 @@ vector<Sample> Perceptron::getListOfBadlyClassificatedSamples()
 
 
 
-Perceptron::Perceptron(vector<Sample> sampleList, string localization) : Classifier(sampleList,localization)
+Perceptron::Perceptron(vector<Sample> sampleList, string localization, int it, double learningFactor) : Classifier(sampleList,localization)
 {
 	this->samplesList = sampleList;
 
 	//ustawienie domyœlej wagi dla ka¿dej próbki
 	for (int i = 0; i < sampleList.at(0).getNumberOfProperites(); i++)
 	{
-		this->weight.push_back(1/*static_cast <float> (rand()) / static_cast <float> (RAND_MAX)*/);
+		this->weight.push_back(static_cast <float> (rand()) / static_cast <float> (RAND_MAX));
 		this->bestWeight.push_back(1);
 	}
 
 	this->threshold = 0;
-	this->learningFactor = 0.001;
+	this->it = it;
+	this->learningFactor = learningFactor;
 	this->localization = localization;
 
 	ada_weights = nullptr;
@@ -289,19 +291,20 @@ Perceptron::Perceptron(vector<Sample> sampleList, string localization) : Classif
 
 }
 
-Perceptron::Perceptron(vector<Sample> samplesList, vector<double> &ada_weights, string localization) : Classifier(samplesList,localization)
+Perceptron::Perceptron(vector<Sample> samplesList, vector<double> &ada_weights, string localization, int it, double learningFactor) : Classifier(samplesList,localization)
 {
 	this->samplesList = samplesList;
 
 	//ustawienie domyœlej wagi dla ka¿dej próbki
 	for (int i = 0; i < samplesList.at(0).getNumberOfProperites(); i++)
 	{
-		this->weight.push_back(1);
+		this->weight.push_back(static_cast <float> (rand()) / static_cast <float> (RAND_MAX));
 		this->bestWeight.push_back(1);
 	}
 
 	this->threshold = 0;
-	this->learningFactor = 0.001;
+	this->learningFactor = learningFactor;
+	this->it = it;
 	this->localization = localization;
 
 	this->ada_weights = &ada_weights;

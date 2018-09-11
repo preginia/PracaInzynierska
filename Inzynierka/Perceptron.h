@@ -31,6 +31,7 @@ protected:
 	double bestBias;
 	int threshold;
 	double learningFactor;
+	int it;
 
 	bool IsSampleBadlyClassificated(double value, int expectedValue);
 	void ModifyWeights(Sample &randomBadSample);
@@ -45,8 +46,8 @@ public:
 	double Classification(Sample sample) override;
 
 	double Classification2(Sample sample) ;
-	Perceptron(vector<Sample> samplesList, vector<double> &ada_weights, string localization);
-	Perceptron(vector<Sample> samplesList, string localization);
+	Perceptron(vector<Sample> samplesList, vector<double> &ada_weights, string localization, int it, double learningFactor);
+	Perceptron(vector<Sample> samplesList, string localization, int it, double learningFactor);
 
 	~Perceptron();
 	void writeWeights();

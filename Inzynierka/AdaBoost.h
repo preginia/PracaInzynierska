@@ -19,13 +19,16 @@ private:
 
 	int iterations;
 
+	int ClassiferIt;
+	double LFACTOR;
+
 	void FillDefaultWeights();
 public:
 	void DSBoost();
 	void PerceptronBoost();
 	void PerceptronMVBoost();
 	double Classification(Sample sample);
-	AdaBoost(vector<Sample> listOfSamples,int iterations,std::string localization);
+	AdaBoost(vector<Sample> listOfSamples,int iterations,std::string localization,int ClassiferIt, double LFACTOR);
 	~AdaBoost();
 
 	std::string GetLocalization();

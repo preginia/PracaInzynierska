@@ -90,7 +90,7 @@ void AdaBoost::PerceptronBoost()
 {
 	for (int i = 0; i < iterations; i++)
 	{
-		Classifier *cls = new Perceptron(listOfSamples, ada_weights, localization);
+		Classifier *cls = new Perceptron(listOfSamples, ada_weights, localization,ClassiferIt, LFACTOR);
 		cls->Learning();
 
 		double err = 0;
@@ -168,7 +168,7 @@ void AdaBoost::PerceptronMVBoost()
 {
 	for (int i = 0; i < iterations; i++)
 	{
-		Classifier *cls = new MultiVariantePerceptron(listOfSamples, ada_weights, localization);
+		Classifier *cls = new MultiVariantePerceptron(listOfSamples, ada_weights, localization,ClassiferIt,LFACTOR);
 		cls->Learning();
 
 		double err = 0;
@@ -256,11 +256,13 @@ double AdaBoost::Classification(Sample sample)
 	return out;
 }
 
-AdaBoost::AdaBoost(vector<Sample> listOfSamples,int iterations,std::string localization)
+AdaBoost::AdaBoost(vector<Sample> listOfSamples,int iterations,std::string localization, int ClassiferIt, double LFACTOR)
 {
 	this->localization = localization;
 	this->iterations = iterations;
 	this->listOfSamples = listOfSamples;
+	this->ClassiferIt = ClassiferIt;
+	this->LFACTOR = LFACTOR;
 
 	FillDefaultWeights();
 }

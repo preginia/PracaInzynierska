@@ -9,8 +9,6 @@ using namespace std;
 void MultiVariantePerceptron::Learning()
 {
 	srand(time(NULL));
-	int iterationsAmount = 300;
-	this->learningFactor = 0.1;
 	int minOfBadClassificatedSamples = samplesList.size();
 
 	//cout << endl << "Percetron expected localizaton: " << this->localization << endl << endl;
@@ -81,20 +79,20 @@ void MultiVariantePerceptron::Learning()
 			}
 		}
 		// Konczê uczenie gdy wszystkie próbki s¹ dobrze klasyfikowane lub osi¹gniêto iloœæ iteracji
-		if (badClassificatedSamplesAmount == 0 || iterationsAmount == 0)
+		if (badClassificatedSamplesAmount == 0 || this->it == 0)
 		{
-			WriteLearningStatusInLastIteration(iterationsAmount, minOfBadClassificatedSamples);
+			WriteLearningStatusInLastIteration(this->it, minOfBadClassificatedSamples);
 			break;
 		}
 
-		WriteLearningStatus(iterationsAmount, minOfBadClassificatedSamples);
+		WriteLearningStatus(this->it, minOfBadClassificatedSamples);
 
 		// Wœród Ÿle sklasyfikowanych próbkek losuje jedn¹ i na jej podstawie modyfikuje wagi
 		int randomIndexOfBadClassificatedSample = std::rand() % badClassificatedSamplesAmount;
 		Sample randomBadSample = badClassificatedSamplesList.at(randomIndexOfBadClassificatedSample);
 		ModifyWeights(randomBadSample);
 
-		iterationsAmount--;
+		this->it--;
 
 	}
 }
@@ -104,12 +102,12 @@ double MultiVariantePerceptron::Classification(Sample sample)
 	return countWithBestWeights(sample);
 }
 
-MultiVariantePerceptron::MultiVariantePerceptron(vector<Sample> sampleList, string localization) : Perceptron(sampleList, localization)
+MultiVariantePerceptron::MultiVariantePerceptron(vector<Sample> sampleList, string localization, int it, double learningFactor) : Perceptron(sampleList, localization,  it,  learningFactor)
 {
 }
 
-MultiVariantePerceptron::MultiVariantePerceptron(vector<Sample> samplesList, vector<double>& ada_weights, string localization) 
-	: Perceptron(samplesList,ada_weights,localization)
+MultiVariantePerceptron::MultiVariantePerceptron(vector<Sample> samplesList, vector<double>& ada_weights, string localization, int it, double learningFactor)
+	: Perceptron(samplesList,ada_weights,localization, it, learningFactor)
 {
 }
 
