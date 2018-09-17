@@ -1,8 +1,7 @@
 ﻿  Inzynierka.cpp
-c:\users\preginia\documents\inzynierka\inzynierka\inzynierka.cpp(79): warning C4101: 'AdaItterations': unreferenced local variable
   Generating code
-  6 of 540 functions ( 1.1%) were compiled, the rest were copied from previous compilation.
-    1 functions were new in current compilation
-    11 functions had inline decision re-evaluated but remain unchanged
+  66 of 694 functions ( 9.5%) were compiled, the rest were copied from previous compilation.
+    16 functions were new in current compilation
+    55 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   Inzynierka.vcxproj -> C:\Users\preginia\Documents\Inzynierka\x64\Release\Inzynierka.exe

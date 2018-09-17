@@ -149,6 +149,7 @@
     <ClInclude Include="Classifier.h" />
     <ClInclude Include="DatasFromFile.h" />
     <ClInclude Include="DecisionStump.h" />
+    <ClInclude Include="IrisData.h" />
     <ClInclude Include="Localization.h" />
     <ClInclude Include="MultiVariantePerceptron.h" />
     <ClInclude Include="OneVsAll.h" />
@@ -175,6 +176,7 @@
     <ClCompile Include="Inzynierka.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="IrisData.cpp" />
     <ClCompile Include="Localization.cpp" />
     <ClCompile Include="MultiVariantePerceptron.cpp" />
     <ClCompile Include="OneVsAll.cpp">

@@ -6,7 +6,7 @@ using namespace std;
 
 class DatasFromFile
 {
-private:
+protected:
 	vector<Sample> listOfPatients;
 	
 public:
